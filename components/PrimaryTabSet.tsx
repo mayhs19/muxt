@@ -5,14 +5,22 @@ import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
+
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import DynamicFormIcon from '@mui/icons-material/DynamicForm';
+
 
 import { IconContext } from "react-icons";
 import { SiPython } from 'react-icons/si';
 import { GrGolang } from 'react-icons/gr';
 import { FaRust } from 'react-icons/fa';
 import { FiCode } from 'react-icons/fi';
+
+import PythonForm from './PythonForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -28,6 +36,14 @@ function ColoredReactIcon({ children }){
     </IconContext.Provider>
   )
 }
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#cef3f1',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -79,16 +95,28 @@ export default function PrimaryTabSet() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Python" icon={<IconButton aria-label="Python"><SiPython /></IconButton>} aria-label="phone"  {...a11yProps(0)} />
-          <Tab label="Go Lang" icon={<IconButton aria-label="Golang"><FiCode /></IconButton>} aria-label="phone"  {...a11yProps(1)} />
-          <Tab label="Rust" icon={<IconButton aria-label="Rust"><FaRust /></IconButton>} aria-label="phone" {...a11yProps(2)} />
+          <Tab label="Python" icon={<IconButton aria-label="Python"><SiPython /></IconButton>} aria-label="pythom"  {...a11yProps(0)} />
+          <Tab label="Golang" icon={<IconButton aria-label="Golang"><DynamicFormIcon /></IconButton>} aria-label="golang"  {...a11yProps(1)} />
+          <Tab label="Rust" icon={<IconButton aria-label="Rust"><FaRust /></IconButton>} aria-label="rust" {...a11yProps(2)} />
         </Tabs>
       </AppBar>      
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+        <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <Item>
+                </Item>
+            </Grid>
+            <Grid item xs={6}>
+              <Item>xs=6</Item>
+            </Grid>
+            <Grid item xs>
+              <Item>xs</Item>
+            </Grid>
+        </Grid>
+        
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <PythonForm/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           Item Three
